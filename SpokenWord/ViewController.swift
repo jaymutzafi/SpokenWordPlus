@@ -19,7 +19,7 @@ public class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     private let audioEngine = AVAudioEngine()
     
-    @IBOutlet var textView: UITextView!
+    @IBOutlet var textView: TranscriptionTextView!
     
     @IBOutlet var recordButton: UIButton!
     
@@ -96,7 +96,10 @@ public class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             
             if let result = result {
                 // Update the text view with the results.
-                self.textView.text = result.bestTranscription.formattedString
+                //self.textView.text = result.bestTranscription.formattedString
+                
+                self.textView.configure(transcription: result.bestTranscription)
+                
                 isFinal = result.isFinal
                 print("Text \(result.bestTranscription.formattedString)")
             }
